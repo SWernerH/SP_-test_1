@@ -2,6 +2,7 @@ package handlers
 
 import (
     "context"
+    "database/sql"
     "encoding/json"
     "errors"
     "net/http"
@@ -9,9 +10,9 @@ import (
     "time"
 
     "golang.org/x/crypto/bcrypt"
-    "streaming_platform/internal/db"
-    "streaming_platform/internal/models"
-    "streaming_platform/internal/validator"
+    "github.com/SWernerH/test_1/internal/db"
+    "github.com/SWernerH/test_1/internal/models"
+    "github.com/SWernerH/test_1/internal/validator"
 )
 
 type Application struct {
@@ -84,7 +85,7 @@ func (app *Application) GetUser(w http.ResponseWriter, r *http.Request) {
 
     err = app.DB.QueryRowContext(ctx, query, id).Scan(&u.ID, &u.Username, &u.Email)
     if err != nil {
-        if errors.Is(err, db.ErrNoRows) {
+        if errors.Is(err, sql.ErrNoRows) {
             app.notFound(w)
         } else {
             app.serverError(w, err)

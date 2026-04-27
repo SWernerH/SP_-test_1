@@ -3,14 +3,13 @@ package main
 import (
     "log"
     "net/http"
-    "os"
 
-    "streaming_platform/internal/db"
-    "streaming_platform/internal/handlers"
+    "github.com/SWernerH/test_1/internal/db"
+    "github.com/SWernerH/test_1/internal/handlers"
 )
 
 func main() {
-    dsn := os.Getenv("STREAMING_DSN")
+    dsn := "postgres://werner:2024161143@localhost:5432/streaming_platform?sslmode=disable"
     if dsn == "" {
         log.Fatal("STREAMING_DSN environment variable not set")
     }
